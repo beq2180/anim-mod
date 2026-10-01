@@ -13,8 +13,8 @@ import mchorse.bbs_mod.utils.pose.Transform;
 import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.VertexConsumerProvider;
-import net.minecraft.client.render.model.json.ModelTransformationMode;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.item.ItemDisplayContext;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.NbtComponent;
 import net.minecraft.item.ItemStack;
@@ -48,7 +48,7 @@ public class ModelBlockItemRenderer implements BuiltinItemRendererRegistry.Dynam
     }
 
     @Override
-    public void render(ItemStack stack, ModelTransformationMode mode, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay)
+    public void render(ItemStack stack, ItemDisplayContext mode, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay)
     {
         Item item = this.get(stack);
 
@@ -76,19 +76,19 @@ public class ModelBlockItemRenderer implements BuiltinItemRendererRegistry.Dynam
         }
     }
 
-    private Form getForm(ModelBlockEntity.Properties properties, ModelTransformationMode mode)
+    private Form getForm(ModelBlockEntity.Properties properties, ItemDisplayContext mode)
     {
         Form form = properties.getForm();
 
-        if (mode == ModelTransformationMode.GUI && properties.getFormInventory() != null)
+        if (mode == ItemDisplayContext.GUI && properties.getFormInventory() != null)
         {
             form = properties.getFormInventory();
         }
-        else if ((mode == ModelTransformationMode.THIRD_PERSON_LEFT_HAND || mode == ModelTransformationMode.THIRD_PERSON_RIGHT_HAND) && properties.getFormThirdPerson() != null)
+        else if ((mode == ItemDisplayContext.THIRD_PERSON_LEFT_HAND || mode == ItemDisplayContext.THIRD_PERSON_RIGHT_HAND) && properties.getFormThirdPerson() != null)
         {
             form = properties.getFormThirdPerson();
         }
-        else if ((mode == ModelTransformationMode.FIRST_PERSON_LEFT_HAND || mode == ModelTransformationMode.FIRST_PERSON_RIGHT_HAND) && properties.getFormFirstPerson() != null)
+        else if ((mode == ItemDisplayContext.FIRST_PERSON_LEFT_HAND || mode == ItemDisplayContext.FIRST_PERSON_RIGHT_HAND) && properties.getFormFirstPerson() != null)
         {
             form = properties.getFormFirstPerson();
         }
@@ -96,19 +96,19 @@ public class ModelBlockItemRenderer implements BuiltinItemRendererRegistry.Dynam
         return form;
     }
 
-    private Transform getTransform(ModelBlockEntity.Properties properties, ModelTransformationMode mode)
+    private Transform getTransform(ModelBlockEntity.Properties properties, ItemDisplayContext mode)
     {
         Transform transform = properties.getTransformThirdPerson();
 
-        if (mode == ModelTransformationMode.GUI)
+        if (mode == ItemDisplayContext.GUI)
         {
             transform = properties.getTransformInventory();
         }
-        else if (mode == ModelTransformationMode.FIRST_PERSON_LEFT_HAND || mode == ModelTransformationMode.FIRST_PERSON_RIGHT_HAND)
+        else if (mode == ItemDisplayContext.FIRST_PERSON_LEFT_HAND || mode == ItemDisplayContext.FIRST_PERSON_RIGHT_HAND)
         {
             transform = properties.getTransformFirstPerson();
         }
-        else if (mode == ModelTransformationMode.GROUND)
+        else if (mode == ItemDisplayContext.GROUND)
         {
             transform = properties.getTransform();
         }

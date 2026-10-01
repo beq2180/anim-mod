@@ -9,7 +9,7 @@ import mchorse.bbs_mod.ui.forms.editors.panels.widgets.UIItemStack;
 import mchorse.bbs_mod.ui.framework.elements.buttons.UIButton;
 import mchorse.bbs_mod.ui.utils.UI;
 import mchorse.bbs_mod.ui.utils.icons.Icons;
-import net.minecraft.client.render.model.json.ModelTransformationMode;
+import net.minecraft.item.ItemDisplayContext;
 
 public class UIItemFormPanel extends UIFormPanel<ItemForm>
 {
@@ -24,7 +24,7 @@ public class UIItemFormPanel extends UIFormPanel<ItemForm>
         {
             this.getContext().replaceContextMenu((menu) ->
             {
-                for (ModelTransformationMode value : ModelTransformationMode.values())
+                for (ItemDisplayContext value : ItemDisplayContext.values())
                 {
                     if (this.form.modelTransform.get() == value)
                     {
@@ -43,7 +43,7 @@ public class UIItemFormPanel extends UIFormPanel<ItemForm>
         this.options.add(UI.label(UIKeys.FORMS_EDITORS_ITEM_TRANSFORMS), this.modelTransform, this.itemStackEditor);
     }
 
-    private void setModelTransform(ModelTransformationMode value)
+    private void setModelTransform(ItemDisplayContext value)
     {
         this.form.modelTransform.set(value);
 

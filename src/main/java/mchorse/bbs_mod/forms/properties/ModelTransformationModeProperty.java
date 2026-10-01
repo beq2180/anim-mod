@@ -2,11 +2,11 @@ package mchorse.bbs_mod.forms.properties;
 
 import mchorse.bbs_mod.data.types.MapType;
 import mchorse.bbs_mod.forms.forms.Form;
-import net.minecraft.client.render.model.json.ModelTransformationMode;
+import net.minecraft.item.ItemDisplayContext;
 
-public class ModelTransformationModeProperty extends BaseProperty<ModelTransformationMode>
+public class ModelTransformationModeProperty extends BaseProperty<ItemDisplayContext>
 {
-    public ModelTransformationModeProperty(Form form, String key, ModelTransformationMode value)
+    public ModelTransformationModeProperty(Form form, String key, ItemDisplayContext value)
     {
         super(form, key, value);
     }
@@ -14,7 +14,7 @@ public class ModelTransformationModeProperty extends BaseProperty<ModelTransform
     @Override
     public void toData(MapType data)
     {
-        data.putString(this.key, (this.value == null ? ModelTransformationMode.NONE : this.value).asString());
+        data.putString(this.key, (this.value == null ? ItemDisplayContext.NONE : this.value).asString());
     }
 
     @Override
@@ -22,9 +22,9 @@ public class ModelTransformationModeProperty extends BaseProperty<ModelTransform
     {
         String string = data.getString(key);
 
-        this.set(ModelTransformationMode.NONE);
+        this.set(ItemDisplayContext.NONE);
 
-        for (ModelTransformationMode value : ModelTransformationMode.values())
+        for (ItemDisplayContext value : ItemDisplayContext.values())
         {
             if (value.asString().equals(string))
             {
