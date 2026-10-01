@@ -53,8 +53,11 @@ dependencies {
 	// These are included in the Fabric API production distribution and allow you to update your mod to the latest modules at a later more convenient time.
 
 	// modImplementation "net.fabricmc.fabric-api:fabric-api-deprecated:${project.fabric_version}"
-	modImplementation "maven.modrinth:sodium:mc1.21.11-0.8.11"
-	modCompileOnly "maven.modrinth:iris:1.10.7+1.21.11"
+	// Optional compatibility integrations; keep them compile-only so CI does not fail
+	// when users do not have those mods installed or when Modrinth publishes slightly
+	// different artifact coordinates for the same version.
+	modCompileOnly "maven.modrinth:sodium:mc1.21.11-0.8.11-fabric"
+	modCompileOnly "maven.modrinth:iris:1.10.7+1.21.11-fabric"
 
 	modImplementation "org.anarres:jcpp:1.4.14"
 	modImplementation "io.github.douira:glsl-transformer:2.0.0-pre13"
